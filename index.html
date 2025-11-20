@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Information Grid</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- <link rel="stylesheet" href="./style.css"> -->
+   <style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    font-family: Arial, sans-serif;
+}
+
+/* Calculator Main Body */
+.calculator{
+    width: 320px;
+    background: #1c1c1e;
+    padding: 15px;
+    border-radius: 30px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+/* Display */
+#a{
+    width: 100%;
+    height: 80px;
+    background: #1c1c1e;
+    border: none;
+    color: white;
+    font-size: 2vw;
+    text-align: right;
+    padding: 20px;
+    border-radius: 20px;
+    outline: none;
+     text-shadow: 
+        0 0 4px rgba(0, 0, 0, 0.7),
+        0 0 8px rgba(0, 0, 0, 0.5);
+}
+#a {
+    transition: font-size 0.2s ease;
+}
+#b{
+    width: 100%;
+    height: 30px;
+    background: #1c1c1e;
+    border: none;
+    color: white;
+    font-size: 25px;
+    text-align: right;
+    padding: 20px;
+    border-radius: 20px;
+    outline: none;
+}
+
+#b {
+    transition: all 0.2s ease;
+    opacity: 0.6;
+}
+
+#b.show {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+/* All buttons */
+button{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: none;
+    margin: 5px;
+    font-size: 1.5rem;
+     background: linear-gradient(#3a3a3c, #2c2c2e);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+#plus, #min, #mul, #slash, #mod, #equ{
+    background: linear-gradient(#f7a33a, #f69906);
+}
+
+/* Number buttons (Gray) */
+button:not(#plus):not(#min):not(#mul):not(#slash):not(#mod):not(#equ):not(#clear):not(#remove){
+    background: #2F2F2F;
+    color: white;
+    border: solid #727272;
+}
+
+/* iPhone Orange Buttons (Operators) */
+#plus, #min, #mul, #slash, #mod, #equ{
+    background: #f69906;
+    color: white;
+}
+
+/* Clear + Delete buttons (Light Gray) */
+#clear, #remove{
+    background: #d4d4d2;
+    color: black;
+}
+
+/* Button Press Animation (like iPhone) */
+button:active{
+    transform: scale(0.90);
+    filter: brightness(1.2);
+}
+/* Align all rows */
+.section-1,
+.section-2,
+.section-3,
+.section-4,
+.section-5{
+    display: flex;
+    justify-content: center;
+}
+.active-effect{
+    transform: scale(0.88);
+    filter: brightness(1.4);
+}
+#num00{
+    width: 65px;
+    border-radius: 50px;
+}
+
+.section-5 button {
+    height: 65px;  /* normal height */
+    width: 65px;   /* default width for 0 and . */
+    border-radius: 50%;
+}
+.mul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    padding-bottom: 5px;
+    /* padding-top: 13px; */
+}
+.min{
+ font-size: 40px;
+ padding-bottom: 10px;
+ padding-right: 4px;
+}
+.plus{
+    font-size: 30px;
+}
+.equ{
+    font-size: 30px;
+    padding-right: 3px;
+}
+
+/* ===== MOBILE RESPONSIVE MODE ===== */
+@media (max-width: 500px) {
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: #000;
+        overflow: hidden;
+    }
+
+    .calculator {
+        width: 100%;
+        height: 100%;
+        border-radius: 0px;
+        box-shadow: none;
+        padding: 10px;
+        background-color: #000000;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+
+    #a {
+        height: 140px;
+        font-size: 28px;
+        padding: 0px;
+       /* background: #8b8b8b; */
+ background-color: #000000;
+         width: 100vw;
+        border-radius: 0%;
+        margin: 0px;
+        padding-right: 10px;
+    }
+
+    #b {
+        height: 70px;
+        font-size: 22px;
+            /* background: #1c1c1e; */
+            /* background-color: #505050; */
+             background-color: #000000;
+         opacity: 1;
+         border-radius: 0px;
+         margin: 0px;
+         margin-bottom: 10px;
+         width: 100vw;
+         
+    }
+
+    /* Buttons responsive */
+    button {
+        width: 30vw;
+        height: 30vw;
+        max-width: 90px;
+        max-height: 90px;
+        font-size: 6vw;
+        margin: 4px;
+    }
+
+    #num00 {
+        width: 30vw;
+        height: 30vw;
+    }
+
+    .section-1,
+    .section-2,
+    .section-3,
+    .section-4,
+    .section-5 {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .mul, .min, .plus, .equ {
+        font-size: 40px;
+    }
+    .section-5 button {
+        width: 30vw;
+        height: 30vw;
+        max-width: 90px;
+        max-height: 90px;
+}
+}
+
+.sci{
+    width: 100%;
+    height: 170px;
+    background-color: #a87c7c;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.boxes{
+    width: 100%;
+    height: 10px;
+    background-color: #fff;
+}
+
+</style>
+</head>
+<body>
+  <div class="calculator">
+ <input type="text" value="" id="a" readonly>
+ <input type="text" value="" id="b" readonly>
+ <div class="section-1"> 
+  <button id="mod">%</button>
+  <button id="slash">/</button>
+  <button id="remove">DEL</button>
+  <button id="clear">A/C</button>
+</div>
+<div class="section-2">
+  <button id="num7">7</button>
+  <button id="num8">8</button>
+  <button id="num9">9</button>
+  <button id="mul" class="mul">x</button>
+</div>
+<div class="section-3">
+  <button id="num4">4</button>
+  <button id="num5">5</button>
+  <button id="num6">6</button>
+  <button id="min" class="min">-</button>
+</div>
+<div class="section-4">
+  <button id="num1" class="o">1</button>
+  <button id="num2" class="o">2</button>
+  <button id="num3">3</button>
+  <button id="plus" class="plus">+</button>
+</div>
+<div class="section-5">
+   <button id="num00">00</button>
+  <button id="num0">0</button>
+  <button id="dot">.</button>
+  <button id="equ" class="equ">=</button>
+</div>
+</div>
+<audio src="../audio/mixkit-hard-typewriter-click-1119.wav"></audio>
+   <script>
+
+    let all = document.querySelectorAll("button")
+let a = document.querySelector("#a")
+
+let tap = new Audio("./audio/mixkit-hard-typewriter-click-1119.wav");
+tap.volume = 0.5;
+
+if ("vibrate" in navigator) {
+    navigator.vibrate(10);
+}
+
+function playSound(){
+    tap.currentTime = 0; 
+    tap.play();
+
+     if ("vibrate" in navigator) {
+        navigator.vibrate(10);
+    }
+}
+
+all[12].addEventListener("click", function(){
+     playSound()
+    a.value += "1" 
+     showLiveResult()
+     adjustFontSize()
+})
+all[13].addEventListener("click", function(){
+     playSound()
+    a.value += "2"
+      showLiveResult()
+      adjustFontSize()
+})
+all[14].addEventListener("click", function(){
+     playSound()
+    a.value += "3"
+      showLiveResult()
+      adjustFontSize()
+})
+all[8].addEventListener("click", function(){
+     playSound()
+    a.value += "4"
+      showLiveResult()
+      adjustFontSize()
+})
+
+all[9].addEventListener("click", function(){
+     playSound()
+    a.value += "5"
+      showLiveResult()
+      adjustFontSize()
+})
+all[10].addEventListener("click", function(){
+     playSound()
+    a.value += "6"
+      showLiveResult()
+      adjustFontSize()
+})
+all[4].addEventListener("click", function(){
+     playSound()
+    a.value += "7"
+      showLiveResult()
+      adjustFontSize()
+})
+all[5].addEventListener("click", function(){
+     playSound()
+    a.value += "8"
+      showLiveResult()
+      adjustFontSize()
+})
+all[6].addEventListener("click", function(){
+     playSound()
+    a.value += "9"
+      showLiveResult()
+      adjustFontSize()
+})
+all[17].addEventListener("click", function(){
+     playSound()
+    a.value += "0"
+      showLiveResult()
+      adjustFontSize()
+})
+all[16].addEventListener("click", function(){
+     playSound()
+    a.value += "00"
+      showLiveResult()
+      adjustFontSize()
+})
+all[2].addEventListener("click",function(){
+     playSound()
+    a.value = a.value.slice(0, -1)
+    showLiveResult();
+    adjustFontSize()
+})
+all[3].addEventListener("click", function(){
+     playSound()
+    a.value = ""
+      showLiveResult()
+      adjustFontSize()
+})
+all[15].addEventListener("click",function(){
+     playSound()
+    a.value += "+"
+      showLiveResult()
+      adjustFontSize()
+})
+all[11].addEventListener("click",function(){
+     playSound()
+    a.value += "-"
+      showLiveResult()
+      adjustFontSize()
+})
+all[7].addEventListener("click",function(){
+     playSound()
+
+      a.value += "x";
+     let calcValue = a.value.replace(/x/g, "*");
+      b.value = eval(calcValue);
+      showLiveResult()
+      adjustFontSize()
+})
+all[0].addEventListener("click",function(){
+     playSound()
+    a.value += "%"
+      showLiveResult()
+      adjustFontSize()
+})
+all[1].addEventListener("click",function(){
+     playSound()
+    a.value += "/"
+      showLiveResult()
+      adjustFontSize()
+})
+all[18].addEventListener("click",function(){
+     playSound()
+    a.value += "."
+      showLiveResult()
+      adjustFontSize()
+})
+
+all[19].addEventListener("click", function () {
+    playSound();
+
+    if (a.value !== "") {
+
+        // x ko * me convert karo (only for calculation)
+        let calcValue = a.value.replace(/x/g, "*");
+
+        a.value = eval(calcValue);  // correct final result
+        b.value = "";               // live result clear
+    }
+});
+
+document.addEventListener("keydown", function(e){
+     playSound()
+    showLiveResult()
+    const allowed = "0123456789+-*/.%";
+    if (allowed.includes(e.key)) {
+        a.value += e.key;
+        showLiveResult();
+        adjustFontSize()
+    }
+
+    if (e.key === "Backspace") {
+        a.value = a.value.slice(0, -1);
+        adjustFontSize()
+    }
+
+    if (e.key === "Enter") {
+        a.value = eval(a.value);
+         b.value = "";
+        adjustFontSize()
+    }
+});
+
+
+document.addEventListener("keydown", (e)=>{
+    let keyBtn = document.querySelector(`button[data-key="${e.key}"]`);
+    if(keyBtn){
+        keyBtn.classList.add("active-effect");
+        setTimeout(() => keyBtn.classList.remove("active-effect"), 150);
+    }
+});
+
+let b = document.querySelector("#b");
+
+
+function showLiveResult() {
+    try {
+        if (a.value !== "") {
+            let calc = a.value.replace(/x/g, "*");
+            b.value = eval(calc);
+        } else {
+            b.value = "";
+        }
+    } catch {
+        b.value = "";
+    }
+}
+
+function adjustFontSize() {
+    let length = a.value.length;
+
+    if (length < 10) {
+        a.style.fontSize = "32px";
+    } 
+    else if (length < 18) {
+        a.style.fontSize = "26px";
+    }
+    else if (length < 26) {
+        a.style.fontSize = "20px";
+    }
+    else {
+        a.style.fontSize = "16px";
+    }
+}
+   </script>
+</body>
+</html>
